@@ -22,7 +22,7 @@ import { useState } from "react";
 import { Input } from "../../ui/input";
 import { DataTablePagination } from "./DataTablePagination";
 import { DataTableViewOptions } from "./DataTableViewOptions";
-import { Card, CardContent, CardFooter, CardHeader } from "../../ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../ui/card";
 import { DataTableProps } from "./interface";
 
 export function DataTable<TData, TValue>({
@@ -33,6 +33,8 @@ export function DataTable<TData, TValue>({
   styles,
   renderTableFooter,
   renderTableHeader,
+  title,
+  description
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -70,9 +72,15 @@ export function DataTable<TData, TValue>({
         style={styles?.headerStyle}
       >
         {renderTableHeader ? (
-          renderTableHeader(table)
+          renderTableHeader(table, CardTitle, CardDescription)
         ) : (
           <>
+            <CardTitle>
+              {title}
+            </CardTitle>
+            <CardDescription>
+              {description}
+            </CardDescription>
             {filtersConfig?.columnNames.map((columnName) => (
               <Input
                 key={columnName}

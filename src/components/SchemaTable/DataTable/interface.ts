@@ -3,6 +3,8 @@ import { Column, ColumnDef, Table } from "@tanstack/react-table";
 export interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  title?: string;
+  description?: string;
   panel?: boolean;
   styles?: {
     containerClassName?: string;
@@ -18,7 +20,17 @@ export interface DataTableProps<TData, TValue> {
     placeholder: string;
     columnNames: string[];
   };
-  renderTableHeader?: (table: Table<TData>) => React.ReactNode;
+  renderTableHeader?: (
+    table: Table<TData>,
+    CardTitle: React.ForwardRefExoticComponent<
+      React.HTMLAttributes<HTMLHeadingElement> &
+        React.RefAttributes<HTMLParagraphElement>
+    >,
+    CardDescription: React.ForwardRefExoticComponent<
+      React.HTMLAttributes<HTMLParagraphElement> &
+        React.RefAttributes<HTMLParagraphElement>
+    >
+  ) => React.ReactNode;
   renderTableFooter?: (table: Table<TData>) => React.ReactNode;
 }
 
